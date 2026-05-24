@@ -13,6 +13,11 @@ class Donation extends Model
         'status',
     ];
 
+    public function donationRequest()
+    {
+        return $this->belongsTo(DonationRequest::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -15,6 +15,11 @@ class DonationRequest extends Model
         'is_urgent',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function donations()
     {
         return $this->hasMany(Donation::class);
