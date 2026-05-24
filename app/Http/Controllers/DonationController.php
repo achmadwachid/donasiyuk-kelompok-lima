@@ -43,16 +43,6 @@ class DonationController extends Controller
         return view('halamanutama.panti', compact('activeRequests'));
     }
 
-    public function showHistoryDonatur()
-    {
-        $donations = Donation::with(['donationRequest.user'])
-            ->where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        return view('riwayat.donatur', compact('donations'));
-    }
-
     public function showHistoryPanti()
     {
         // Get donations for requests made by this panti
