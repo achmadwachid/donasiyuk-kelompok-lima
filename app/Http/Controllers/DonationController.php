@@ -87,6 +87,13 @@ class DonationController extends Controller
             'quantity_needed' => 'required|integer|min:1',
             'unit' => 'required|string|max:50',
             'is_urgent' => 'nullable|boolean',
+        ], [
+            'item_name.required' => 'Nama barang bantuan harus diisi.',
+            'item_name.max' => 'Nama barang terlalu panjang (maksimal 255 karakter).',
+            'quantity_needed.required' => 'Jumlah barang yang dibutuhkan harus diisi.',
+            'quantity_needed.integer' => 'Jumlah harus berupa angka bulat.',
+            'quantity_needed.min' => 'Jumlah minimal bantuan yang diminta adalah 1.',
+            'unit.required' => 'Satuan barang (seperti kg, pcs, atau liter) harus diisi.',
         ]);
 
         DonationRequest::create([
@@ -106,6 +113,10 @@ class DonationController extends Controller
         $validated = $request->validate([
             'donation_request_id' => 'required|exists:donation_requests,id',
             'quantity_donated' => 'required|integer|min:1',
+        ], [
+            'quantity_donated.required' => 'Jumlah yang ingin didonasikan harus diisi.',
+            'quantity_donated.integer' => 'Jumlah donasi harus berupa angka.',
+            'quantity_donated.min' => 'Minimal donasi adalah 1 barang.',
         ]);
 
         $donationRequest = DonationRequest::findOrFail($validated['donation_request_id']);
